@@ -1,0 +1,24 @@
+﻿@model List<Cinemas>
+
+<h1>Cinemas</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <a href="/Cinemas/Details?CinemasId=@item.CinemasId">All Movies</a>
+                    @* <a href="/Home/ShowCategory?CategoriesId=@item.CategoriesId">All Movies</a> *@
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

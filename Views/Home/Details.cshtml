@@ -1,0 +1,119 @@
+﻿@model ETickets.Models.Movies
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="alert alert-success" role="alert">
+    Views :@Model.ViewCounter
+</div>
+@if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
+{
+
+    <span class="badge badge-primary">Available</span>
+}
+else if (DateTime.Now < Model.StartDate)
+{
+    <span class="badge badge-secondary">Upcoming</span>
+}
+else
+{
+    <span class="badge badge-danger">Expired</span>
+}
+<h1>Details @Model.Name</h1>
+
+<div>
+ 
+    <hr />
+    <img src="~/images/@Model.ImgUrl" class="img-fluid" style="width: 150px; height: auto;" />
+
+    <dl class="row">
+        @* <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd> *@
+        <dt class = "col-sm-2">
+            Description :
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            Price :
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+       @*  <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ImgUrl)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ImgUrl)
+        </dd> *@
+       
+        <dt class = "col-sm-2">
+           Start Date:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class = "col-sm-2">
+            End Date:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            Category Name:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Categories.Name)
+        </dd>
+
+         <dt class = "col-sm-2">
+        Actors :
+        </dt>
+       @*  <dd class = "col-sm-10">
+            @foreach (var actor in Model.Actors)
+            {
+                <div>
+                    <img src="~/images/@actor.ProfilePicture" alt="@actor.FirstName @actor.LastName" />
+                    <p>@actor.FirstName @actor.LastName</p>
+                </div>
+            }
+        </dd> *@
+
+
+
+
+        <dt class="col-sm-2">
+            Trailer:
+        </dt>
+        <dd class="col-sm-10">
+            @if (!string.IsNullOrEmpty(Model.TrailerUrl))
+            {
+                string embedUrl = Model.TrailerUrl.Replace("watch?v=", "embed/") + "?autoplay=1&mute=1";
+                <iframe width="420" height="345" src="@embedUrl" allowfullscreen></iframe>
+            }
+
+           
+            else
+            {
+                <p>Trailer not available.</p>
+            }
+        </dd>
+        <dt>
+        </dt>
+            <dd>
+            <button class="btn btn-success">Book Ticket</button>
+        </dd>
+
+        <a href="#" style="text-decoration: underline;"> Edit | Back To List</a>
+        @* <a href="#">Back To List</a> *@
+
+       
+    </dl>
+</div>
+

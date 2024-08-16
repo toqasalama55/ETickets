@@ -1,0 +1,125 @@
+﻿@model List<Movies>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
+<div class="container py-5">
+    <section style="background-color: #eee;">
+        @for (int i = 0; i < Model.Count; i += 2)
+        {
+            <div class="row mb-4">
+                <!-- First Card -->
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                           @*  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                @TempData["Count"]
+                                <span class="visually-hidden">unread messages</span>
+                            </span> *@
+                           @*  <button type="button" class="btn btn-primary position-relative">
+                                @Model[i].Name
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    @TempData["Count"]
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            </button> *@
+                            <h5 class="card-title">@Model[i].Name</h5>
+                            <div class="d-flex">
+                               
+                                <img src="~/images/@Model[i].ImgUrl" class="img-fluid" style="width: 150px; height: auto; margin-right: 20px;" />
+                                <div>
+                                    <a href="/Home/Edit?MoviesId=@Model[i].MoviesId" class="btn btn-warning" role="button">Edit</a>
+                                    <p class="text-dark mb-1"><strong>Price:</strong> @Model[i].Price</p>
+                                    <p class="text-dark mb-1"><strong>Cinema:</strong> @Model[i].Cinemas.Name</p>
+                                    <p class="text-dark mb-1"><strong>Start Date:</strong> @Model[i].StartDate</p>
+                                    <p class="text-dark mb-1"><strong>End Date:</strong> @Model[i].EndDate</p>
+                                    <p class="text-dark mb-1"><strong>Category:</strong> <a asp-route-CategoriesId="@Model[i].Categories.CategoriesId" asp-action="ShowCategory" asp-controller="Home" style="text-decoration: underline;">@Model[i].Categories.Name</a></p>
+                                    @if (DateTime.Now >= Model[i].StartDate && DateTime.Now <= Model[i].EndDate)
+                                    {
+                                            
+                                        <span class="badge badge-primary">Available</span>
+                                    }
+                                    else if (DateTime.Now < Model[i].StartDate)
+                                    {
+                                        <span class="badge badge-secondary">Upcoming</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger">Expired</span>
+                                    }
+                                    <a href="/Home/Details?MoviesId=@Model[i].MoviesId" class="btn btn-outline-secondary">More Details</a>
+                                    @if (DateTime.Now > Model[i].StartDate && DateTime.Now > Model[i].EndDate)
+                                    {
+                                        <button type="button" class="btn btn-secondary" disabled>Book Ticket</button>
+                                    }
+                                    else if (DateTime.Now >= Model[i].StartDate && DateTime.Now <= Model[i].EndDate)
+                                    {
+                                        <button class="btn btn-success">Book Ticket</button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-success">Book Ticket</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Card (if exists) -->
+                @if (i + 1 < Model.Count)
+                {
+                    <div class="col-md-6">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                @* <button type="button" class="btn btn-primary position-relative">
+                                    @Model[i+1].Name
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        @TempData["Count"]
+                                        <span class="visually-hidden">unread messages</span>
+                                    </span>
+                                </button> *@
+                                <h5 class="card-title">@Model[i + 1].Name</h5>
+                                <div class="d-flex">
+                                    <img src="~/images/@Model[i + 1].ImgUrl" class="img-fluid" style="width: 150px; height: auto; margin-right: 20px;" />
+                                    <div>
+                                        <a href="/Home/Edit?MoviesId=@Model[i + 1].MoviesId" class="btn btn-warning" role="button">Edit</a>
+                                        <p class="text-dark mb-1"><strong>Price:</strong> @Model[i + 1].Price</p>
+                                        <p class="text-dark mb-1"><strong>Cinema:</strong> @Model[i + 1].Cinemas.Name</p>
+                                        <p class="text-dark mb-1"><strong>Start Date:</strong> @Model[i + 1].StartDate</p>
+                                        <p class="text-dark mb-1"><strong>End Date:</strong> @Model[i + 1].EndDate</p>
+                                        <p class="text-dark mb-1"><strong>Category:</strong><a asp-route-CategoriesId="@Model[i+1].Categories.CategoriesId" asp-action="ShowCategory" asp-controller="Home" style="text-decoration: underline;">@Model[i + 1].Categories.Name</a></p>
+                                        @if (DateTime.Now >= Model[i + 1].StartDate && DateTime.Now <= Model[i + 1].EndDate)
+                                        {
+                                            <span class="badge badge-primary">Available</span>
+                                        }
+                                        else if (DateTime.Now < Model[i + 1].StartDate)
+                                        {
+                                            <span class="badge badge-secondary">Upcoming</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger">Expired</span>
+                                        }
+                                        <a href="/Home/Details?MoviesId=@Model[i + 1].MoviesId" class="btn btn-outline-secondary">More Details</a>
+                                        @if (DateTime.Now > Model[i + 1].StartDate && DateTime.Now > Model[i + 1].EndDate)
+                                        {
+                                            <button type="button" class="btn btn-secondary" disabled>Book Ticket</button>
+                                        }
+                                        else if (DateTime.Now >= Model[i + 1].StartDate && DateTime.Now <= Model[i + 1].EndDate)
+                                        {
+                                            <button class="btn btn-success">Book Ticket</button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-success">Book Ticket</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </section>
+</div>
