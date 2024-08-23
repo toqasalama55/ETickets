@@ -27,7 +27,11 @@
                                
                                 <img src="~/images/@Model[i].ImgUrl" class="img-fluid" style="width: 150px; height: auto; margin-right: 20px;" />
                                 <div>
+                                      @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                       {
+ 
                                     <a href="/Home/Edit?MoviesId=@Model[i].MoviesId" class="btn btn-warning" role="button">Edit</a>
+                                       }
                                     <p class="text-dark mb-1"><strong>Price:</strong> @Model[i].Price</p>
                                     <p class="text-dark mb-1"><strong>Cinema:</strong> @Model[i].Cinemas.Name</p>
                                     <p class="text-dark mb-1"><strong>Start Date:</strong> @Model[i].StartDate</p>
@@ -59,6 +63,16 @@
                                     {
                                         <button class="btn btn-success">Book Ticket</button>
                                     }
+                                    <div>
+
+
+                                        <a href="/ShoppingCart/Index?MoviesId=@Model[i].MoviesId" class="btn btn-primary">
+                                        Add To Cart
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-basket-fill" viewBox="0 0 16 16">
+                                            <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z" />
+                                        </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -82,8 +96,11 @@
                                 <div class="d-flex">
                                     <img src="~/images/@Model[i + 1].ImgUrl" class="img-fluid" style="width: 150px; height: auto; margin-right: 20px;" />
                                     <div>
-                                        <a href="/Home/Edit?MoviesId=@Model[i + 1].MoviesId" class="btn btn-warning" role="button">Edit</a>
-                                        <p class="text-dark mb-1"><strong>Price:</strong> @Model[i + 1].Price</p>
+                                          @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                           {
+                                               <a href="/Home/Edit?MoviesId=@Model[i + 1].MoviesId" class="btn btn-warning" role="button">Edit</a>
+                                           }
+                                         <p class="text-dark mb-1"><strong>Price:</strong> @Model[i + 1].Price</p>
                                         <p class="text-dark mb-1"><strong>Cinema:</strong> @Model[i + 1].Cinemas.Name</p>
                                         <p class="text-dark mb-1"><strong>Start Date:</strong> @Model[i + 1].StartDate</p>
                                         <p class="text-dark mb-1"><strong>End Date:</strong> @Model[i + 1].EndDate</p>
@@ -113,6 +130,14 @@
                                         {
                                             <button class="btn btn-success">Book Ticket</button>
                                         }
+                                        <div>
+                                            <a href="/ShoppingCart/Index?MoviesId=@Model[i+1].MoviesId" class="btn btn-primary">
+                                            Add To Cart
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" fill="currentColor" class="bi bi-basket-fill" viewBox="0 0 16 16">
+                                                <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z" />
+                                            </svg>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

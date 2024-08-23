@@ -13,6 +13,7 @@ namespace ETickets.Data
         public DbSet<Cinemas> Cinemas { get; set; }
         public DbSet<Actors> Actors { get; set; }
         public DbSet<Movies> Movies { get; set; }
+        public DbSet<ShoppingCart> ShoppingCart { get; set; }
         // public DbSet<ActorsMovies> ActorsMovies { get; set; }
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
         : base(options)
@@ -36,8 +37,8 @@ namespace ETickets.Data
 
             optionsBuilder.UseSqlServer(connection);
         }
-        public DbSet<ETickets.Models.ViewModel.ApplicationUserVM> ApplicationUserVM { get; set; } = default!;
-        public DbSet<ETickets.Models.ViewModel.LoginVM> LoginVM { get; set; } = default!;
+        public DbSet<ETickets.Models.ViewModel.RoleVM> RoleVM { get; set; } = default!;
+        
         //    protected override void OnModelCreating(ModelBuilder modelBuilder)
         //    {
         //        modelBuilder.Entity<ActorsMovies>()

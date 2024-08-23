@@ -26,8 +26,7 @@ namespace ETickets.Controllers
 
         public IActionResult Details(int MoviesId)
         {
-             
-             
+            
             var res = context.Movies.Find(MoviesId);
             var res2 = context.Movies.Include(e => e.Categories).ToList();
              ViewData["ViewCounter"]= res.ViewCounter++;

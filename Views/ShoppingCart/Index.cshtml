@@ -1,0 +1,66 @@
+﻿@model List<ShoppingCart>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Shopping Cart</h2>
+        <div class="card">
+            <div class="card-header">
+                <a href="/Home/Index" class="btn btn-secondary">Continue Shopping</a>
+            </div>
+
+            @foreach (var item in Model)
+            {
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-2">
+                            <img src="/Images/@item.Movies.ImgUrl" alt="Item Image" class="img-fluid">
+                        </div>
+                        <div class="col-md-4">
+                            <h5>@item.Movies.Name</h5>
+                            <p class="text-muted">@item.Movies.Description</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <a href="/ShoppingCart/Decrement?Id=@item.Id" class="btn btn-outline-secondary">-</a>
+                                <input type="text" class="form-control text-center" value="@item.Count">
+                                <a href="/ShoppingCart/Increment?Id=@item.Id" class="btn btn-outline-secondary">+</a>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <span>@item.Movies.Price x Count</span>
+                        </div>
+
+                        @* delete button *@
+                        <div class="col-md-1 text-end">
+                            <a href="/ShoppingCart/Delete?Id=@item.Id" class="btn btn-danger">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <hr>
+
+                  
+                </div>
+            }
+            <div class="row">
+                <div class="col d-flex flex-column align-items-center">
+
+                    <h4>Total (USD): $$</h4>
+                    <button class="btn btn-dark">Summary</button>
+                </div>
+            </div>
+                </div>
+                </div>
+            @* <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script> *@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
