@@ -14,6 +14,7 @@ namespace ETickets.Data
         public DbSet<Actors> Actors { get; set; }
         public DbSet<Movies> Movies { get; set; }
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
+      //  public DbSet<StripeSettings> StripeSettings { get; set; }
         // public DbSet<ActorsMovies> ActorsMovies { get; set; }
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options)
         : base(options)

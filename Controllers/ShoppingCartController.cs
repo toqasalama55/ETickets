@@ -3,6 +3,8 @@ using ETickets.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Stripe.Checkout;
 
 namespace ETickets.Controllers
 {
@@ -33,6 +35,8 @@ namespace ETickets.Controllers
             }
 
             var result = context.ShoppingCart.Include(e=>e.Movies).Where(e => e.ApplicationUserId == userId).ToList();
+            TempData["shoppingCart"] = JsonConvert.SerializeObject(result);
+            ViewBag.Total = result.Sum(e => e.Count * e.Movies.Price);
             return View(result);
         }
 
@@ -70,5 +74,41 @@ namespace ETickets.Controllers
 
         }
 
+        public IActionResult Pay()
+        {
+            var items = JsonConvert.DeserializeObject<IEnumerable<ShoppingCart>>((string)TempData["shoppingCart"]);
+
+            var options = new SessionCreateOptions
+            {
+                PaymentMethodTypes = new List<string> { "card" },
+                LineItems = new List<SessionLineItemOptions>(),
+                Mode = "payment",
+                SuccessUrl = $"{Request.Scheme}://{Request.Host}/checkout/success",
+                CancelUrl = $"{Request.Scheme}://{Request.Host}/checkout/cancel",
+            };
+            foreach (var model in items)
+            {
+                var result = new SessionLineItemOptions
+                {
+                    PriceData = new SessionLineItemPriceDataOptions
+                    {
+                        Currency = "usd",
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = model.Movies.Name,
+                        },
+                        UnitAmount = (long)model.Movies.Price * 100,
+                    },
+                    Quantity = model.Count,
+                };
+                options.LineItems.Add(result);
+            }
+
+            var service = new SessionService();
+            var session = service.Create(options);
+            return Redirect(session.Url);
+        }
     }
+
+
 }

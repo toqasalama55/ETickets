@@ -2,6 +2,7 @@ using ETickets.Data;
 using ETickets.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 namespace ETickets
 {
@@ -21,7 +22,10 @@ namespace ETickets
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnetion")));
 
 
-           // builder.Services.AddScoped<IRepository, MemoryRepository>();
+            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+            StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+
+            // builder.Services.AddScoped<IRepository, MemoryRepository>();
 
             var app = builder.Build();
 
